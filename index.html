@@ -1,0 +1,82 @@
+<html><head><script src="http://code.jquery.com/jquery-1.8.3.min.js"></script> <style style="display:none">/**/@font-face{font-family:'Monda-Regular';src:url("http://www.wildstream.io/turbine/../fonts/Monda-Regular.woff") format("woff"),url("http://www.wildstream.io/turbine/../fonts/Monda-Regular.otf") format("opentype"),url("http://www.wildstream.io/turbine/../fonts/Monda-Regular.svg#Monda-Regular") format("svg");font-weight:bold;font-style:italic;}@media screen{body{font-family:'Monda-Regular';margin:5px 0px 0px 0px;padding:0px;positon:relative;}#starmenu a{background:#f3f3f3;color:#9999;font-size:30px;padding:10px;border-radius:50%;white-space:nowrap;}#starmenu li{list-style:none;}ul#starmenu{position:absolute;top:300px;left:400px;}}
+</style>
+</head><body><ul id="starmenu"><li><a>Category</a><ul><li><a>mood</a><ul><li><a>I am so sexy!</a></li> <li><a>What i am feeling</a></li> <li><a>What i am doing</a></li> <li><a>Just now</a></li> <li><a>high</a></li> <li><a>drunk</a></li></ul></li><li><a>posing</a><ul><li><a>me and my friends</a></li> <li><a>My new outfit</a></li> <li><a>Me and something</a></li> <li><a>Me and a cool background</a></li></ul></li><li><a>art</a><ul><li><a>streetart</a></li> <li><a>photographie</a></li> <li><a>painting</a></li> <li><a>digital art</a></li> <li><a>sculpure</a></li> <li><a>body</a></li></ul></li><li><a>interest</a><ul><li><a>politics</a></li> <li><a>science</a></li> <li><a>cats</a></li> <li><a>nature</a></li> <li><a>sports</a></li></ul></li><li><a>computer</a><ul><li><a>geek</a></li> <li><a>programming</a></li> <li><a>glitch</a></li> <li><a>Tools</a></li> <li><a>Gaget</a></li> <li><a>Internet</a></li></ul></li><li><a>lifestyle</a><ul><li><a>stuff</a></li> <li><a>funpics</a></li> <li><a>memes</a></li></ul></li><li><a>home</a><ul><li><a>My fridge</a></li> <li><a>My closet</a></li> <li><a>My badroom</a></li></ul></li></ul></li></ul><!--
+	<ul id="starmenu">
+		<li><a>base</a>
+			<ul >
+				<li><a>one</a>
+				</li>
+				<li><a>ontwo</a>
+				</li>
+				<li><a>two</a>
+				</li>
+				<li><a>three</a>
+				</li>
+				<li><a>foursub</a>
+					<ul>
+						<li> <a>fourone</a>
+						</li>
+						<li> <a>fourtwo</a>
+						</li>
+						<li><a>fourthree</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+
+	</ul>
+	//--><script>
+	var radius = 200;
+	close=true;
+	$("#starmenu ul").hide();
+	$("#starmenu a").click(function(){ if($(this).parent().children().length==2){
+
+		var item = new Object();
+		item=$(this).next().children();
+		//console.log(item);
+		level=1;
+		//console.log(item.length);
+	if($(this).parent().children(':first-child').next().is(":hidden")){ 
+		$(item).parent().css({'position':'relative'});
+		$(item).parent().css({'z-index':'1000'});
+		$(this).parent().children(':first-child').next().show();
+		parentItem = $(this).parent().parent();
+		console.log($(parentItem));
+		while($(parentItem).attr('id')!="starmenu") {level++;
+		parentItem = $(parentItem).parent().parent();}
+		//alert(level);
+		console.log(level);
+		for(i=0;i<item.length;i++){
+				/* Magic happens here. Math by yukterez */
+				tempRadius=radius/(level*0.8);
+				console.log(tempRadius);
+				xOffset=yOffset=0;
+				alpha=(2*Math.PI/item.length*(i+1))             /* Radiant statt Grad  */
+				x=xOffset+tempRadius*Math.sin(alpha) 
+				y=yOffset+tempRadius*Math.cos(alpha)                
+				$(item[i]).css({'top':-$(this).parent().children(':first-child').height()+'px','left':0+'px','position':'absolute','opacity':'0'});
+				$(item[i]).animate({'top': (-$(this).parent().children(':first-child').height()-$(item[i]).height())/2 + y + 'px','left':($(this).parent().children(':first-child').width()-$(item[i]).width())/2 + x+'px','opacity':'1'});
+		
+		}
+	}else{
+		parent=$(this).parent().children(':first-child').next();
+		for(i=0;i<item.length;i++){
+			
+
+				$(item[i]).animate({'top':-$(this).parent().children(':first-child').height()+'px','left':0+'px','position':'absolute','opacity':'0'},400,function(){hideThis()});
+				//$(item[i]).animate({'top': (-$(this).parent().children(':first-child').height()-$(item[i]).height())/2 + y + 'px','left':($(this).parent().children(':first-child').width()-$(item[i]).width())/2 + x+'px'});
+		
+		}
+		
+	
+
+	}
+
+	}})
+	function hideThis(){
+
+		$(parent).hide();
+	}
+
+	</script> </body></html>
